@@ -1,0 +1,128 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "BOHICA (Debug)",
+			"request": "launch",
+			"preLaunchTask": "BOHICA Win64 Debug Build",
+			"program": "C:\\Users\\leonp\\Documents\\Unreal Projects\\BOHICA\\Binaries\\Win64\\BOHICA-Win64-Debug.exe",
+			"args": [
+			],
+			"cwd": "C:\\Program Files\\Epic Games\\UE_4.22",
+			"stopAtEntry": false,
+			"externalConsole": true,
+			"type": "cppvsdbg",
+			"visualizerFile": "C:\\Program Files\\Epic Games\\UE_4.22\\Engine\\Extras\\VisualStudioDebugging\\UE4.natvis"
+		},
+		{
+			"name": "BOHICA (DebugGame)",
+			"request": "launch",
+			"preLaunchTask": "BOHICA Win64 DebugGame Build",
+			"program": "C:\\Users\\leonp\\Documents\\Unreal Projects\\BOHICA\\Binaries\\Win64\\BOHICA-Win64-DebugGame.exe",
+			"args": [
+			],
+			"cwd": "C:\\Program Files\\Epic Games\\UE_4.22",
+			"stopAtEntry": false,
+			"externalConsole": true,
+			"type": "cppvsdbg",
+			"visualizerFile": "C:\\Program Files\\Epic Games\\UE_4.22\\Engine\\Extras\\VisualStudioDebugging\\UE4.natvis"
+		},
+		{
+			"name": "BOHICA (Development)",
+			"request": "launch",
+			"preLaunchTask": "BOHICA Win64 Development Build",
+			"program": "C:\\Users\\leonp\\Documents\\Unreal Projects\\BOHICA\\Binaries\\Win64\\BOHICA.exe",
+			"args": [
+			],
+			"cwd": "C:\\Program Files\\Epic Games\\UE_4.22",
+			"stopAtEntry": false,
+			"externalConsole": true,
+			"type": "cppvsdbg",
+			"visualizerFile": "C:\\Program Files\\Epic Games\\UE_4.22\\Engine\\Extras\\VisualStudioDebugging\\UE4.natvis"
+		},
+		{
+			"name": "BOHICA (Shipping)",
+			"request": "launch",
+			"preLaunchTask": "BOHICA Win64 Shipping Build",
+			"program": "C:\\Users\\leonp\\Documents\\Unreal Projects\\BOHICA\\Binaries\\Win64\\BOHICA-Win64-Shipping.exe",
+			"args": [
+			],
+			"cwd": "C:\\Program Files\\Epic Games\\UE_4.22",
+			"stopAtEntry": false,
+			"externalConsole": true,
+			"type": "cppvsdbg",
+			"visualizerFile": "C:\\Program Files\\Epic Games\\UE_4.22\\Engine\\Extras\\VisualStudioDebugging\\UE4.natvis"
+		},
+		{
+			"name": "BOHICA (Test)",
+			"request": "launch",
+			"preLaunchTask": "BOHICA Win64 Test Build",
+			"program": "C:\\Users\\leonp\\Documents\\Unreal Projects\\BOHICA\\Binaries\\Win64\\BOHICA-Win64-Test.exe",
+			"args": [
+			],
+			"cwd": "C:\\Program Files\\Epic Games\\UE_4.22",
+			"stopAtEntry": false,
+			"externalConsole": true,
+			"type": "cppvsdbg",
+			"visualizerFile": "C:\\Program Files\\Epic Games\\UE_4.22\\Engine\\Extras\\VisualStudioDebugging\\UE4.natvis"
+		},
+		{
+			"name": "BOHICAEditor (Debug)",
+			"request": "launch",
+			"preLaunchTask": "BOHICAEditor Win64 Debug Build",
+			"program": "C:\\Program Files\\Epic Games\\UE_4.22\\Engine\\Binaries\\Win64\\UE4Editor-Win64-Debug.exe",
+			"args": [
+				"C:\\Users\\leonp\\Documents\\Unreal Projects\\BOHICA\\BOHICA.uproject"
+			],
+			"cwd": "C:\\Program Files\\Epic Games\\UE_4.22",
+			"stopAtEntry": false,
+			"externalConsole": true,
+			"type": "cppvsdbg",
+			"visualizerFile": "C:\\Program Files\\Epic Games\\UE_4.22\\Engine\\Extras\\VisualStudioDebugging\\UE4.natvis"
+		},
+		{
+			"name": "BOHICAEditor (DebugGame)",
+			"request": "launch",
+			"preLaunchTask": "BOHICAEditor Win64 DebugGame Build",
+			"program": "C:\\Program Files\\Epic Games\\UE_4.22\\Engine\\Binaries\\Win64\\UE4Editor.exe",
+			"args": [
+				"C:\\Users\\leonp\\Documents\\Unreal Projects\\BOHICA\\BOHICA.uproject"
+			],
+			"cwd": "C:\\Program Files\\Epic Games\\UE_4.22",
+			"stopAtEntry": false,
+			"externalConsole": true,
+			"type": "cppvsdbg",
+			"visualizerFile": "C:\\Program Files\\Epic Games\\UE_4.22\\Engine\\Extras\\VisualStudioDebugging\\UE4.natvis"
+		},
+		{
+			"name": "BOHICAEditor (Development)",
+			"request": "launch",
+			"preLaunchTask": "BOHICAEditor Win64 Development Build",
+			"program": "C:\\Program Files\\Epic Games\\UE_4.22\\Engine\\Binaries\\Win64\\UE4Editor.exe",
+			"args": [
+				"C:\\Users\\leonp\\Documents\\Unreal Projects\\BOHICA\\BOHICA.uproject"
+			],
+			"cwd": "C:\\Program Files\\Epic Games\\UE_4.22",
+			"stopAtEntry": false,
+			"externalConsole": true,
+			"type": "cppvsdbg",
+			"visualizerFile": "C:\\Program Files\\Epic Games\\UE_4.22\\Engine\\Extras\\VisualStudioDebugging\\UE4.natvis"
+		},
+		{
+			"name": "Generate Project Files",
+			"type": "clr",
+			"request": "launch",
+			"program": "C:\\Program Files\\Epic Games\\UE_4.22\\Engine\\Binaries\\DotNET\\UnrealBuildTool.exe",
+			"console": "externalTerminal",
+			"args": [
+				"-projectfiles",
+				"-vscode",
+				"-project=\"C:\\Users\\leonp\\Documents\\Unreal Projects\\BOHICA\\BOHICA.uproject\"",
+				"-game",
+				"-engine"
+			],
+			"internalConsoleOptions": "openOnSessionStart",
+			"cwd": "C:\\Program Files\\Epic Games\\UE_4.22"
+		}
+	]
+}
