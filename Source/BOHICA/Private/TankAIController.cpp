@@ -4,9 +4,15 @@
 #include "TankAIController.h"
 
 void ATankAIController::BeginPlay() {
+    Super::BeginPlay();
     auto AITank = GetPlayerTank();
     if (!AITank) {return;}
     UE_LOG(LogTemp, Warning, TEXT("AI found player tank: %s"), *(AITank->GetName()));
+}
+
+void ATankAIController::Tick(float DeltaTime) {
+    Super::Tick(DeltaTime);
+    GetControlledTank()->AimAt(GetPlayerTank()->GetActorLocation());
 }
 
 ATank* ATankAIController::GetControlledTank() const {
