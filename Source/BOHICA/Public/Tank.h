@@ -10,6 +10,7 @@
 class UTankBarrel;
 class UTankTurret;
 class UTankAimingComponent;
+class AProjectile;
 
 UCLASS()
 class BOHICA_API ATank : public APawn
@@ -35,6 +36,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Setup)
 	void SetTurretreference(UTankTurret* TurretToSet);
 
+	UFUNCTION(BlueprintCallable, Category = Firing)
+	void Fire();
+
 protected:
 	UTankAimingComponent* TankAimingComponent = nullptr;
 
@@ -45,4 +49,8 @@ private:
 	UPROPERTY(EditAnywhere, Category = Firing)
 	float LaunchSpeed = 100000;
 
+	UPROPERTY(EditAnywhere, Category = Setup)
+	TSubclassOf<AProjectile> ProjectileBlueprint;
+
+	UTankBarrel* Barrel = nullptr;
 };
