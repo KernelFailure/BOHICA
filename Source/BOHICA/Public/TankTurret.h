@@ -4,18 +4,18 @@
 
 #include "CoreMinimal.h"
 #include "Components/StaticMeshComponent.h"
-#include "TankBarrel.generated.h"
+#include "TankTurret.generated.h"
 
 /**
  * 
  */
-UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent), hidecategories = ("Collision") )
-class BOHICA_API UTankBarrel : public UStaticMeshComponent
+UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
+class BOHICA_API UTankTurret : public UStaticMeshComponent
 {
 	GENERATED_BODY()
 
 public:
-	void Elevate(float RelativeSpeed);
+	void Rotate(float RelativeSpeed);
 	
 private:
 	UPROPERTY(EditAnywhere, Category = Setup)

@@ -7,6 +7,7 @@
 #include "TankAimingComponent.generated.h"
 
 class UTankBarrel;
+class UTankTurret;
 
 // Holds barrel properties and elevate method
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
@@ -16,6 +17,7 @@ class BOHICA_API UTankAimingComponent : public UActorComponent
 
 private:	
 	UTankBarrel* Barrel = nullptr;
+	UTankTurret* Turret = nullptr;
 
 	void MoveBarrelTowards(FVector AimDirection);
 
@@ -27,5 +29,7 @@ public:
 	UTankAimingComponent();
 
 	void setBarrelReference(UTankBarrel* BarrelToSet);
+
+	void setTurrentReference(UTankTurret* TurretToSet);
 		
 };
