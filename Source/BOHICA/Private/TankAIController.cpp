@@ -6,23 +6,19 @@
 
 
 void ATankAIController::BeginPlay() {
-    Super::BeginPlay();
-    auto AITank = GetPlayerTank();
-    if (!AITank) {return;}
-    UE_LOG(LogTemp, Warning, TEXT("AI found player tank: %s"), *(AITank->GetName()));
+    Super::BeginPlay();    
 }
 
 void ATankAIController::Tick(float DeltaTime) {
     Super::Tick(DeltaTime);
-    GetControlledTank()->AimAt(GetPlayerTank()->GetActorLocation());
+
+    auto PlayerTank = Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());
+    auto ControlledTank = Cast<ATank>(GetPawn());
+    if (PlayerTank) {
+        ControlledTank->AimAt(PlayerTank->GetActorLocation());
+
+        //ControlledTank->Fire(); Turn off enemy fire to testing.  Just un-comment to make them fire again
+    }
 }
 
-ATank* ATankAIController::GetControlledTank() const {
-    return Cast<ATank>(GetPawn());
-}
 
-ATank* ATankAIController::GetPlayerTank() const{
-    auto FirstPlayerController = GetWorld()->GetFirstPlayerController()->GetPawn();
-    if (!FirstPlayerController) {return nullptr;}
-    return Cast<ATank>(FirstPlayerController);
-}
