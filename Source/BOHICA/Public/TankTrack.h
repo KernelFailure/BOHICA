@@ -9,7 +9,7 @@
 /**
  * 
  */
-UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent), hidecategories = ("Collision") )
+UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
 class BOHICA_API UTankTrack : public UStaticMeshComponent
 {
 	GENERATED_BODY()
@@ -17,4 +17,8 @@ class BOHICA_API UTankTrack : public UStaticMeshComponent
 public:
 	UFUNCTION(BlueprintCallable, Category = Input)
 	void SetThrottle(float speed);
+
+	// Max force per track in Newtons
+	UPROPERTY(EditDefaultsOnly)
+	float TrackMaxDrivingForce = 400000;  // assume 40 tonne tank and 1g acceleration
 };

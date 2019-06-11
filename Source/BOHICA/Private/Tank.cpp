@@ -7,6 +7,7 @@
 #include "TankTrack.h"
 #include "Projectile.h"
 #include "TankAimingComponent.h"
+#include "TankMovementComponent.h"
 
 // Sets default values
 ATank::ATank()
@@ -52,6 +53,8 @@ void ATank::SetTurretreference(UTankTurret* TurretToSet) {
 }
 
 void ATank::Fire() {
+	auto Time = GetWorld()->GetTimeSeconds();
+	UE_LOG(LogTemp, Warning, TEXT("%f: Fire called from Tank class"), Time);
 
 	bool isReloaded = (FPlatformTime::Seconds() - LastFireTime) > ReloadTimeInSeconds;
 	if (Barrel && isReloaded) {
