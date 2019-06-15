@@ -21,6 +21,7 @@ public:
 	void Tick(float DeltaTime) override;
 
 private:
+	// how close AI can get to player
 	float AcceptanceRadius = 3000;
 
 	
