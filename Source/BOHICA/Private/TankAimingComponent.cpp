@@ -4,7 +4,8 @@
 #include "Kismet/GameplayStatics.h"
 #include "TankBarrel.h"
 #include "TankTurret.h"
-#include "TankTrack.h"
+#include "Projectile.h"
+
 
 
 // Sets default values for this component's properties
@@ -16,7 +17,7 @@ UTankAimingComponent::UTankAimingComponent()
 }
 
 
-void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed) {
+void UTankAimingComponent::AimAt(FVector HitLocation) {
 	auto TankName = GetOwner()->GetName();
 	auto BarrelLocation = Barrel->GetComponentLocation().ToString();
 	
@@ -65,4 +66,20 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection) {
 void UTankAimingComponent::Initialise(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet) {
 	Barrel = BarrelToSet;
 	Turret = TurretToSet;
+}
+
+void UTankAimingComponent::Fire() {
+	if (!ensure(Barrel && ProjectileBlueprint)) {return;}
+	bool isReloaded = (FPlatformTime::Seconds() - LastFireTime) > ReloadTimeInSeconds;
+	if (isReloaded) {
+	
+		auto Projectile = GetWorld()->SpawnActor<AProjectile>(
+			ProjectileBlueprint,
+			Barrel->GetSocketLocation(FName("Projectile")),
+			Barrel->GetSocketRotation(FName("Projectile"))
+		);
+
+		Projectile->LaunchProjectile(LaunchSpeed);
+		LastFireTime = FPlatformTime::Seconds();
+	}
 }

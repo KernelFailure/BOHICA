@@ -7,7 +7,7 @@
 #include "GameFramework/PlayerController.h"
 #include "TankPlayerController.generated.h"
 
-class ATank;
+
 class UTankAimingComponent;
 
 UCLASS()
@@ -22,9 +22,6 @@ public:
 	void Tick(float DeltaTime) override;
 
 	void AimTowardsCrosshair();
-
-	UFUNCTION(BlueprintCallable, Category = "Setup")
-	ATank* GetControlledTank() const;
 
 	bool GetSightRayHitLocation(FVector& HitLocation) const;
 
