@@ -2,14 +2,20 @@
 
 
 #include "TankPlayerController.h"
+#include "TankAimingComponent.h"
 #include "Tank.h"
 
 
 void ATankPlayerController::BeginPlay()  {
     Super::BeginPlay();
-    auto tank = GetControlledTank();
-    if (!tank) {return;}
-    //UE_LOG(LogTemp, Warning, TEXT("Player controller found tank: %s"), *(tank->GetName()));
+
+    auto AimingComponent = GetControlledTank()->FindComponentByClass<UTankAimingComponent>();
+    if (ensure(AimingComponent)) {
+        FoundAimingComponent(AimingComponent);
+    } else {
+        UE_LOG(LogTemp, Warning, TEXT("Player controller couldn't find aiming component"));
+    }
+    
 }
 
 void ATankPlayerController::Tick(float DeltaTime) {
@@ -24,6 +30,9 @@ ATank* ATankPlayerController::GetControlledTank() const {
 }
 
 void ATankPlayerController::AimTowardsCrosshair(){
+
+    if (!ensure(GetControlledTank())) {return;}
+
     FVector HitLocation;
     if (GetSightRayHitLocation(HitLocation)) {
             GetControlledTank()->AimAt(HitLocation);
@@ -36,7 +45,6 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector& HitLocation) const {
     FVector2D ScreenLocation = FVector2D(sizeX * CrossHairXLocation, sizeY * CrossHairYLocation);
     FVector LookDirection;
     if (GetLookDirection(ScreenLocation, LookDirection)) {
-        //UE_LOG(LogTemp, Warning, TEXT("Look direction: %s"), *LookDirection.ToString());
         GetLookVectorHitLocation(LookDirection, HitLocation);
     }
 

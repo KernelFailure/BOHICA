@@ -8,6 +8,7 @@
 #include "TankPlayerController.generated.h"
 
 class ATank;
+class UTankAimingComponent;
 
 UCLASS()
 class BOHICA_API ATankPlayerController : public APlayerController
@@ -22,6 +23,7 @@ public:
 
 	void AimTowardsCrosshair();
 
+	UFUNCTION(BlueprintCallable, Category = "Setup")
 	ATank* GetControlledTank() const;
 
 	bool GetSightRayHitLocation(FVector& HitLocation) const;
@@ -38,4 +40,8 @@ public:
 
 	UPROPERTY(EditDefaultsOnly)
 	float LineTraceRange = 1000000;
+
+protected:
+	UFUNCTION(BlueprintImplementableEvent, Category = "Setup")
+	void FoundAimingComponent(UTankAimingComponent* AimCompRef);
 };

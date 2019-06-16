@@ -10,30 +10,30 @@ void UTankMovementComponent::Initialise(UTankTrack* LeftTrackToSet, UTankTrack* 
 }
 
 void UTankMovementComponent::IntendMoveForward(float Throw) {
-    auto Time = GetWorld()->GetTimeSeconds();
-    UE_LOG(LogTemp, Warning, TEXT("%f Intend move forward throw: %f"), Time, Throw);
-    if (!LeftTrack || !RightTrack) {return;}
+    if (!ensure(LeftTrack && RightTrack)) {return;}
+    auto Name = GetOwner()->GetName();
+    UE_LOG(LogTemp, Warning, TEXT("%s is moving FORWARD at throw speed: %f"), *Name, Throw);
     LeftTrack->SetThrottle(Throw);
     RightTrack->SetThrottle(Throw);
 }
 
 void UTankMovementComponent::IntendTurnRight(float Throw) {
-    auto Time = GetWorld()->GetTimeSeconds();
-    UE_LOG(LogTemp, Warning, TEXT("%f Intend right turn throw: %f"), Time, Throw);
-    if (!LeftTrack || !RightTrack) {return;}
+    if (!ensure(LeftTrack && RightTrack)) {return;}
+    auto Name = GetOwner()->GetName();
+    UE_LOG(LogTemp, Warning, TEXT("%s is TURNING RIGHT at throw speed: %f"), *Name, Throw);
     LeftTrack->SetThrottle(Throw);
     RightTrack->SetThrottle(-Throw);
 }
 
 void UTankMovementComponent::RequestDirectMove(const FVector& MoveVelocity, bool bForceMaxSpeed) {
+    UE_LOG(LogTemp, Warning, TEXT("Start request direct move..."));
     auto Name = GetOwner()->GetName();
     auto AIForwardIntention = MoveVelocity.GetSafeNormal();
     auto TankForward = GetOwner()->GetActorForwardVector().GetSafeNormal();
     auto ForwardThrow = FVector::DotProduct(TankForward, AIForwardIntention);
     auto RightTurnVector = FVector::CrossProduct(TankForward, AIForwardIntention);
     auto RightTurnThrow = RightTurnVector.Z;
-
+    UE_LOG(LogTemp, Warning, TEXT("MoveComp forward vector: %f - right turn vector: %f"), ForwardThrow, RightTurnThrow)
     IntendMoveForward(ForwardThrow);
     IntendTurnRight(RightTurnThrow);
-    //UE_LOG(LogTemp, Warning, TEXT("%s is moving at: %s"), *Name, *MoveVelocityString);
 }

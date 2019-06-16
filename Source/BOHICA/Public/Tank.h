@@ -11,7 +11,6 @@ class UTankBarrel;
 class UTankTurret;
 class UTankTrack;
 class UTankAimingComponent;
-class UTankMovementComponent;
 class AProjectile;
 
 UCLASS()
@@ -20,36 +19,25 @@ class BOHICA_API ATank : public APawn
 	GENERATED_BODY()
 
 public:
-
-	// Sets default values for this pawn's properties
-	ATank();
-
-	void AimAt(FVector HitLocation);
-
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+	
+	// Sets default values for this pawn's properties
+	ATank();
 
-	UFUNCTION(BlueprintCallable, Category = Setup)
-	void SetBarrelreference(UTankBarrel* BarrelToSet);
-
-	UFUNCTION(BlueprintCallable, Category = Setup)
-	void SetTurretreference(UTankTurret* TurretToSet);
+	void AimAt(FVector HitLocation);
 
 	UFUNCTION(BlueprintCallable, Category = Firing)
 	void Fire();
 
 protected:
+	UPROPERTY(BlueprintReadOnly)
 	UTankAimingComponent* TankAimingComponent = nullptr;
 
-	UPROPERTY(BlueprintReadOnly)
-	UTankMovementComponent* TankMovementComponent = nullptr;
-
 private:	
-	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	UPROPERTY(EditDefaultsOnly, Category = Setup)
 	TSubclassOf<AProjectile> ProjectileBlueprint;

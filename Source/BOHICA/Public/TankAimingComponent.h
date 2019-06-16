@@ -6,9 +6,15 @@
 #include "Components/ActorComponent.h"
 #include "TankAimingComponent.generated.h"
 
+UENUM()
+enum class EFiringState: uint8 {
+	Reloading,
+	Aiming,
+	Locked
+};
+
 class UTankBarrel;
 class UTankTurret;
-class UTankTrack;
 
 // Holds barrel properties and elevate method
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
@@ -17,9 +23,8 @@ class BOHICA_API UTankAimingComponent : public UActorComponent
 	GENERATED_BODY()
 
 private:	
-	UTankBarrel* Barrel = nullptr;
 	UTankTurret* Turret = nullptr;
-	UTankTrack* Track = nullptr;
+	UTankBarrel* Barrel = nullptr;
 
 	void MoveBarrelTowards(FVector AimDirection);
 
@@ -30,8 +35,10 @@ public:
 	// Sets default values for this component's properties
 	UTankAimingComponent();
 
-	void setBarrelReference(UTankBarrel* BarrelToSet);
-
-	void setTurrentReference(UTankTurret* TurretToSet);
+	UFUNCTION(BlueprintCallable, Category = "Setup")
+	void Initialise(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet);
 		
+protected:
+	UPROPERTY(BlueprintReadOnly, Category = "State")
+	EFiringState FiringState = EFiringState::Aiming;
 };

@@ -1,5 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
+// Test class that can deleted
 
 #include "MyPawn.h"
 
@@ -22,7 +23,6 @@ void AMyPawn::BeginPlay()
 void AMyPawn::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	//UE_LOG(LogTemp, Warning, TEXT("I'm ticking in pawn"));
 
 }
 
