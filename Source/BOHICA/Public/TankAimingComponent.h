@@ -24,6 +24,10 @@ class BOHICA_API UTankAimingComponent : public UActorComponent
 	GENERATED_BODY()
 
 private:	
+	void BeginPlay() override;
+	
+	void TickComponent(float DeltaTime, enum ELevelTick, FActorComponentTickFunction *ThisTickFunction) override;
+
 	UTankTurret* Turret = nullptr;
 	UTankBarrel* Barrel = nullptr;
 
@@ -33,12 +37,16 @@ private:
 	TSubclassOf<AProjectile> ProjectileBlueprint;
 
 	UPROPERTY(EditAnywhere, Category = Firing)
-	float LaunchSpeed = 100000;
+	float LaunchSpeed = 10000;
 
 	UPROPERTY(EditDefaultsOnly, Category = Firing)
 	float ReloadTimeInSeconds = 3;
 
 	double LastFireTime = 0;
+
+	FVector AimDirection;
+
+	bool IsBarrelMoving();
 
 public:	
 
