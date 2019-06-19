@@ -19,7 +19,7 @@ void ATankAIController::Tick(float DeltaTime) {
     MoveToActor(PlayerTank, AcceptanceRadius);
     auto AimingComponent = ControlledTank->FindComponentByClass<UTankAimingComponent>();
     AimingComponent->AimAt(PlayerTank->GetActorLocation());
-    //AimingComponent->Fire(); //Turn off enemy fire to testing.  Just un-comment to make them fire again
+    AimingComponent->Fire(); //Turn off enemy fire to testing.  Just un-comment to make them fire again
     
 }
 
