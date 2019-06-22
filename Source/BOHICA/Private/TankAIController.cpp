@@ -19,7 +19,10 @@ void ATankAIController::Tick(float DeltaTime) {
     MoveToActor(PlayerTank, AcceptanceRadius);
     auto AimingComponent = ControlledTank->FindComponentByClass<UTankAimingComponent>();
     AimingComponent->AimAt(PlayerTank->GetActorLocation());
-    AimingComponent->Fire(); //Turn off enemy fire to testing.  Just un-comment to make them fire again
+    // if locked, go fire
+    if (AimingComponent->GetFiringState() == EFiringState::Locked) {
+        AimingComponent->Fire(); //Turn off enemy fire to testing.  Just un-comment to make them fire again
+    }
     
 }
 
