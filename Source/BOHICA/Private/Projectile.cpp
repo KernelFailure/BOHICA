@@ -2,6 +2,7 @@
 
 
 #include "Projectile.h"
+//#include "RadialForceComponent.generated.h"
 
 // Sets default values
 AProjectile::AProjectile()
@@ -24,6 +25,9 @@ AProjectile::AProjectile()
 	ImpactBlast->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 	ImpactBlast->bAutoActivate = false;
 
+	ExplosionForce = CreateDefaultSubobject<URadialForceComponent>(FName("Explosion"));
+	ExplosionForce->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
+
 }
 
 // Called when the game starts or when spawned
@@ -39,9 +43,7 @@ void AProjectile::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, U
     UE_LOG(LogTemp, Warning, TEXT("I'm hit...Ben is immature"));
 	LaunchBlast->Deactivate();
 	ImpactBlast->Activate();
-    // DriveTrack();
-    // ApplySidewaysForce();
-    // CurrentThrottle = 0;
+	ExplosionForce->FireImpulse();
 }
 
 void AProjectile::LaunchProjectile(float speed) {

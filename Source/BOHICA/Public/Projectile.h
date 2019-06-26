@@ -4,9 +4,12 @@
 
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "CoreMinimal.h"
+#include "PhysicsEngine/RadialForceComponent.h"
 #include "GameFramework/Actor.h"
 #include "Runtime/Engine/Classes/Particles/ParticleSystemComponent.h"
 #include "Projectile.generated.h"
+
+//class URadialForceComponent;
 
 UCLASS()
 class BOHICA_API AProjectile : public AActor
@@ -20,6 +23,8 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+
+	
 
 public:	
 
@@ -40,5 +45,7 @@ private:
 	UPROPERTY(VisibleAnywhere, Category = "Components")
 	UParticleSystemComponent* ImpactBlast = nullptr;
 
+	UPROPERTY(VisibleAnywhere, Category = "Components")
+	URadialForceComponent* ExplosionForce = nullptr;	
 	
 };
