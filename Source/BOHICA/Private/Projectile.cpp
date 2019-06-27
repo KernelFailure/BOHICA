@@ -2,6 +2,8 @@
 
 
 #include "Projectile.h"
+#include "Runtime/Engine/Classes/Kismet/GameplayStatics.h"
+
 //#include "RadialForceComponent.generated.h"
 
 // Sets default values
@@ -40,10 +42,29 @@ void AProjectile::BeginPlay()
 }
 
 void AProjectile::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit) {
-    UE_LOG(LogTemp, Warning, TEXT("I'm hit...Ben is immature"));
+    //UE_LOG(LogTemp, Warning, TEXT("I'm hit...Ben is immature"));
 	LaunchBlast->Deactivate();
 	ImpactBlast->Activate();
 	ExplosionForce->FireImpulse();
+
+	SetRootComponent(ImpactBlast);
+	CollisionMesh->DestroyComponent();
+
+	UGameplayStatics::ApplyRadialDamage(
+		this,
+		ProjectileDamage,
+		GetActorLocation(),
+		ExplosionForce->Radius,
+		UDamageType::StaticClass(),
+		TArray<AActor*>()
+	);
+
+	FTimerHandle Timer;
+	GetWorld()->GetTimerManager().SetTimer(Timer, this, &AProjectile::OnTimerExpire, DestroyDelay, false);
+}
+
+void AProjectile::OnTimerExpire() {
+	Destroy();
 }
 
 void AProjectile::LaunchProjectile(float speed) {
