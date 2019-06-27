@@ -41,4 +41,10 @@ public:
 protected:
 	UFUNCTION(BlueprintImplementableEvent, Category = "Setup")
 	void FoundAimingComponent(UTankAimingComponent* AimCompRef);
+
+	UFUNCTION()
+	void OnControlledTankDeath();
+
+private:
+	void SetPawn(APawn* InPawn);
 };
