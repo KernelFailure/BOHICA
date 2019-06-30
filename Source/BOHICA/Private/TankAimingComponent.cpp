@@ -97,7 +97,7 @@ void UTankAimingComponent::Initialise(UTankBarrel* BarrelToSet, UTankTurret* Tur
 void UTankAimingComponent::Fire() {
 	
 	if (FiringState == EFiringState::Locked || FiringState == EFiringState::Aiming) {
-		UE_LOG(LogTemp, Warning, TEXT("Called Firing!!"));
+		//UE_LOG(LogTemp, Warning, TEXT("Called Firing!!"));
 		if (!ensure(Barrel)) {return;}
 		if (!ensure(ProjectileBlueprint)) {return;}
 		auto Projectile = GetWorld()->SpawnActor<AProjectile>(

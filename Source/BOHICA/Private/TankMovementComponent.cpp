@@ -11,29 +11,33 @@ void UTankMovementComponent::Initialise(UTankTrack* LeftTrackToSet, UTankTrack* 
 
 void UTankMovementComponent::IntendMoveForward(float Throw) {
     if (!ensure(LeftTrack && RightTrack)) {return;}
-    // auto Name = GetOwner()->GetName();
-    // UE_LOG(LogTemp, Warning, TEXT("%s is moving FORWARD at throw speed: %f"), *Name, Throw);
+    auto Name = GetOwner()->GetName();
+    UE_LOG(LogTemp, Warning, TEXT("%s is moving FORWARD at throw speed: %f"), *Name, Throw);
     LeftTrack->SetThrottle(Throw);
     RightTrack->SetThrottle(Throw);
 }
 
 void UTankMovementComponent::IntendTurnRight(float Throw) {
     if (!ensure(LeftTrack && RightTrack)) {return;}
-    // auto Name = GetOwner()->GetName();
-    // UE_LOG(LogTemp, Warning, TEXT("%s is TURNING RIGHT at throw speed: %f"), *Name, Throw);
+    auto Name = GetOwner()->GetName();
+    UE_LOG(LogTemp, Warning, TEXT("%s is TURNING RIGHT at throw speed: %f"), *Name, Throw);
     LeftTrack->SetThrottle(Throw);
     RightTrack->SetThrottle(-Throw);
 }
 
 void UTankMovementComponent::RequestDirectMove(const FVector& MoveVelocity, bool bForceMaxSpeed) {
-    //UE_LOG(LogTemp, Warning, TEXT("Start request direct move..."));
-    auto Name = GetOwner()->GetName();
-    auto AIForwardIntention = MoveVelocity.GetSafeNormal();
+    
     auto TankForward = GetOwner()->GetActorForwardVector().GetSafeNormal();
+    auto AIForwardIntention = MoveVelocity.GetSafeNormal();
+
     auto ForwardThrow = FVector::DotProduct(TankForward, AIForwardIntention);
-    auto RightTurnVector = FVector::CrossProduct(TankForward, AIForwardIntention);
-    auto RightTurnThrow = RightTurnVector.Z;
-    //UE_LOG(LogTemp, Warning, TEXT("MoveComp forward vector: %f - right turn vector: %f"), ForwardThrow, RightTurnThrow)
     IntendMoveForward(ForwardThrow);
-    IntendTurnRight(RightTurnThrow);
+
+    auto RightTurnVector = FVector::CrossProduct(TankForward, AIForwardIntention).Z;
+    IntendTurnRight(RightTurnVector);
+
+    auto Name = GetOwner()->GetName();
+    UE_LOG(LogTemp, Warning, TEXT("%s: MoveComp forward vector: %f - right turn vector: %f"), *Name, ForwardThrow, RightTurnVector);
+    
+    
 }
